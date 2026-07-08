@@ -1,7 +1,7 @@
 import requests
 
-from src.AI.exceptions import AIClientError
-from src.AI.models import Message, Generation, AIResponse
+from src.ai.exceptions import AIClientError
+from src.ai.models import Message, Generation, AIResponse
 from src.utils import time_conversion as tc
 
 class AIClient:
