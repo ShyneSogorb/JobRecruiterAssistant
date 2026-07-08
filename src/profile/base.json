@@ -1,0 +1,92 @@
+{
+  "language": "Spanish",
+
+  "personal": {
+    "name": "",
+    "role": "",
+    "location": "",
+    "email": "",
+    "phone": "",
+    "website": "",
+    "linkedin": "",
+    "github": ""
+  },
+
+  "profile": {
+    "summary": "",
+    "objectives": ""
+  },
+
+  "skills": {
+    "technical": [
+      ""
+    ],
+    "soft": [
+      ""
+    ],
+    "tools": [
+      ""
+    ]
+  },
+
+  "projects": [
+    {
+      "name": "",
+      "description": "",
+      "technologies": [
+        ""
+      ],
+      "achievements": [
+        ""
+      ],
+      "links": [
+        ""
+      ]
+    }
+  ],
+
+  "experience": [
+    {
+      "company": "",
+      "title": "",
+      "start_date": "",
+      "end_date": "",
+
+      "description": "",
+
+      "technologies": [
+        ""
+      ],
+
+      "achievements": [
+        ""
+      ],
+
+      "responsibilities": [
+        ""
+      ]
+    }
+  ],
+
+  "education": [
+    {
+      "institution": "",
+      "degree": "",
+      "field": "",
+      "achievements": [
+        ""
+      ]
+    }
+  ],
+
+  "languages": [
+    {
+      "language": "",
+      "level": ""
+    }
+  ],
+
+  "additional": [
+    ""
+  ]
+}

@@ -1,0 +1,2 @@
+class AIClientError(Exception):
+    pass
