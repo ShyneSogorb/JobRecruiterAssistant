@@ -11,10 +11,16 @@ class AIClient:
         self.base_url = base_url
 
     def ask(self, prompt: str) -> AIResponse:
+        slashes = "-".join("-" for i in range(40))
+        print(slashes)
+        print(prompt)
+        print(slashes)
         payload = self._build_payload(prompt)
 
         response = self._send_request(payload)
-
+        print(slashes)
+        print(response)
+        print(slashes)
         return self._parse_response(response)
 
     @property

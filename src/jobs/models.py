@@ -8,7 +8,7 @@ class Salary(BaseModel):
     period: str | None = None   # hour, month, year
 
 def get_active_flags_name(flag: Flag) -> str:
-    return "|".join(f.name for f in flag)
+    return "|".join(f.name for f in flag) # type: ignore
 
 #use bitflag-like in case of multiple options
 class JobModality(Flag):

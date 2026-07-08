@@ -1,43 +1,10 @@
 from pydantic import BaseModel
 import json
+from src.candidate.models import CandidateProfile
 from src.jobs.models import JobOffer
-
-SYSTEM_PROMPT = """
-You are an expert technical recruiter specialised in software engineering and game development.
-"""
-
-JSON_RULES = """
-Return ONLY valid JSON.
-
-Extract technologies as individual skills.
-
-Do not group multiple technologies into a single string.
-
-Good:
-["C++", "Python", "Linux"]
-
-Bad:
-["Extensive experience in C++ and Python"]
-
-Keep skill names concise.
-
-Use canonical names whenever possible.
-
-Examples:
-"C++17/C++20" -> "C++"
-"Python 3" -> "Python"
-"Git workflows" -> "Git"
-
-The description field must contain the original job description, not a summary.
-
-Do not include spoken languages in required_skills. Put them only in the languages field.
-
-Do not use markdown.
-
-Do not explain anything.
-
-Follow exactly the JSON schema below.
-"""
+from src.ai.prompt_constants.json_rules import JSON_RULES
+from src.ai.prompt_constants.cv_adapted_rules import CV_ADAPTER_RULES
+from src.ai.prompt_constants.system_role import SYSTEM_PROMPT
 
 class PromptBuilder:
 
@@ -51,9 +18,42 @@ class PromptBuilder:
             self._build_json_rules(JobOffer),
             self._build_offer_prompt(offer)
         ])
+    
+    def _build_cv_task(self) -> str:
+        return """
+            Generate a new CandidateProfile adapted to this job offer.
+
+            Return ONLY the adapted CandidateProfile.
+        """
+    
+    def build_cv_adapter(self, profile: CandidateProfile, offer: JobOffer ) -> str:
+        return "\n\n".join([
+            self._build_system_prompt(),
+            f"Output language: {self.language}",
+            self._build_cv_adapter_rules(),
+            self._build_json_rules(CandidateProfile),
+            self._build_profile_prompt(profile),
+            self._build_job_offer_model_prompt(offer),
+            self._build_cv_task()
+        ])
+    
+    def _build_profile_prompt(self, profile: CandidateProfile ) -> str:
+            return (
+                "Candidate Profile:\n\n"
+                + profile.model_dump_json(indent=4)
+            )
+
+    def _build_job_offer_model_prompt(self, offer: JobOffer) -> str:
+        return (
+            "Job Offer:\n\n"
+            + offer.model_dump_json(indent=4)
+        )
 
     def _build_system_prompt(self) -> str:
         return SYSTEM_PROMPT
+
+    def _build_cv_adapter_rules(self)-> str:
+        return CV_ADAPTER_RULES
 
     def _build_json_rules(self, model: type[BaseModel]) -> str:
         schema = json.dumps(

@@ -27,13 +27,13 @@ class Experience(BaseModel):
     achievements: list[str]
 
 class Education(BaseModel):
-    school: str
+    institution: str
     degree: str
-    major: str
+    field: str
     achievements: list[str]
 
 class Language(BaseModel):
-    lang: str
+    language: str
     level: str
 
 

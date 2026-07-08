@@ -1,0 +1,119 @@
+{
+  "language": "Spanish",
+
+  "personal": {
+    "name": "Kingsley Shyne Mattis Sogorb",
+    "role": "",
+    "location": "Villena, Valencian Community, Spain",
+    "email": "shyne2003@gmail.com",
+    "phone": "+34 664 16 10 72",
+    "website": "https://shynesogorb.github.io/webpage/",
+    "linkedin": "https://linkedin.com/in/kingsley-shyne-mattis-sogorb-a4a898214",
+    "github": "https://github.com/ShyneSogorb"
+  },
+
+  "summary": "",
+
+  "skills": [
+      "C++",
+      "Unreal engine",
+      "Python",
+      "Teamwork",
+      "Patience",
+      "Visual studio",
+      "Git",
+      "Perforce"
+  ],
+
+  "projects": [
+    {
+      "name": "Chimera Engine",
+      "description": "A c++ cmake game engine build from scratch aiming for modularity",
+      "technologies": [
+        "C++",
+        "HLSL",
+        "CMake",
+        "Vulkan"
+      ],
+      "achievements": [
+        "Abstracted through interfaces making codding per modules more independant",
+        "Vulkan renderer"
+      ],
+      "links": [
+        ""
+      ]
+    }
+  ],
+
+  "experience": [
+    {
+      "company": "Solo",
+      "title": "Plugin Developer (Unreal Engine)",
+      "date": {
+        "start": "2024",
+        "end": "Present"
+      },
+
+      "description": "",
+
+      "technologies": [
+        "C++",
+        "Unreal engine"
+      ],
+
+      "achievements": [
+        "Custom editor tools",
+        "Weapons behaviour"
+      ],
+
+      "responsibilities": [
+        "Maintainability",
+        "Software design"
+      ]
+    }
+  ],
+
+  "education": [
+    {
+      "institution": "IES Poeta Paco Mollà",
+      "degree": "Specialization",
+      "field": "Game Development And Virtual Reality",
+      "achievements": [
+        "Multiple games tests in unity",
+        "Brick breaker game with power-ups and procedural levels",
+        "Turn base game with smart AI choosing actions based on action queries scores",
+        "Collabed in a bigger turn base game with different army tropes. Such archer, knights, spear-men and others with big shields",
+        "Created tools for designers, reviewed code, helped fixing bugs and pointed towards more efficient or realiable aproaches"
+      ]
+    }
+  ],
+
+  "languages": [
+    {
+      "language": "Spanish",
+      "level": "Native"
+    },
+    {
+      "language": "English",
+      "level": "Fluent"
+    },
+    {
+      "language": "Catalan",
+      "level": "Fluent"
+    },
+    {
+      "language": "German",
+      "level": "Basic"
+    },
+    {
+      "language": "Polish",
+      "level": "Basic"
+    }
+  ],
+
+  "additional": [
+    "Volunteer dog caretaker and trainer, fostering responsibility, patience, and teamwork.",
+    "Experienced medieval swordsman, disciplined and focused.",
+    "Writer in free time, focused on storytelling and world-building."
+  ]
+}
