@@ -219,3 +219,5 @@ __marimo__/
 src/profile/CV_data.json
 test/
 logs/
+cache/
+database/

@@ -1,7 +1,7 @@
 from src.ai.client import AIClient
 from src.ai.prompts import PromptBuilder
-from src.candidate.models import CandidateProfile
-from src.jobs.models import JobOffer
+from modules.models.candidate_models import CandidateProfile
+from modules.models.job_models import JobOffer
 
 class CVAdapter:
 
@@ -11,9 +11,10 @@ class CVAdapter:
 
     def adapt(
         self,
-        profile: CandidateProfile,
+        # profile: CandidateProfile,
+        profile: str,
         offer: JobOffer
     ) -> CandidateProfile:
         prompt = self.prompts.build_cv_adapter(profile, offer)
-        response = self.ai.ask(prompt)
+        response = self.ai.ask(prompt, True, CandidateProfile.model_json_schema())
         return CandidateProfile.model_validate_json(response.message.content)

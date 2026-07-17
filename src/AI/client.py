@@ -1,50 +1,80 @@
+import json
+import textwrap
+from typing import Any
+
 import requests
 
 from src.ai.exceptions import AIClientError
 from src.ai.models import Message, Generation, AIResponse
 from src.utils import time_conversion as tc
+from src.utils.logger import Logger
 
 class AIClient:
 
-    def __init__(self, model: str = "qwen3:14b", base_url: str = "http://localhost:11434") -> None:
+    def __init__(self, logger: Logger, model: str = "qwen3:30b", base_url: str = "http://localhost:11434") -> None:
         self.model = model
         self.base_url = base_url
+        self.logger = logger
 
-    def ask(self, prompt: str) -> AIResponse:
-        slashes = "-".join("-" for i in range(40))
-        print(slashes)
-        print(prompt)
-        print(slashes)
-        payload = self._build_payload(prompt)
+    def _log_separator(self, nrows:int = 1, nslashes:int = 40):
+        slashes = "-".join("-" for i in range(nslashes))
+        for i in range(nrows):
+            self.logger.save(slashes)
+
+    def _log_section(self, section:str, content: Any, nrows = 1):
+        self._log_separator()
+        self.logger.save(section)
+        self._log_separator()
+        self.logger.save(content)
+        self._log_separator()
+
+        
+
+    def ask(self, prompt: str, think: bool = True, format: Any = None) -> AIResponse:
+
+        self._log_separator(3)
+        self.logger.log("NEW QUESTION")
+        self._log_separator(3)
+
+        payload = self._build_payload(prompt, think, format)
+        self._log_section("Payload", payload)
 
         response = self._send_request(payload)
-        print(slashes)
-        print(response)
-        print(slashes)
-        return self._parse_response(response)
+
+        result = self._parse_response(response)
+        self._log_section("AI Response", result)
+
+        return result
 
     @property
     def chat_url(self) -> str:
         return f"{self.base_url}/api/chat"
 
-    def _build_payload(self, prompt: str) -> dict:
-        return {
+    def _build_payload(self, prompt: str, thinking: bool, format: dict[str, Any] | None) -> dict:
+        payload = {
             "model": self.model,
             "messages": [{"role": "user", "content": prompt}],
-            "stream": False
+            "stream": False,
+            "think": thinking,
         }
+        if not type(format) == None:
+            payload["format"]= format
+
+        return payload
     
     
     def _send_request(self, payload: dict) -> requests.Response:
         req = requests.post(
             self.chat_url, 
             json=payload,
-            timeout=60
+            timeout=300
         )
 
         try:
             req.raise_for_status()
         except requests.RequestException as e:
+            self.logger.log(f"Error ocurred, see more at {self.logger.root}")
+            self.logger.save("Error: " + str(e))
             raise AIClientError(...) from e
         
         return req

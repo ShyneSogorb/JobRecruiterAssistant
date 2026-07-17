@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
-from src.jobs.models import JobOffer
-from src.candidate.models import CandidateProfile
+from modules.models.job_models import JobOffer
+from modules.models.candidate_models import CandidateProfile
 
 
 class ResumePipelineResult(BaseModel):

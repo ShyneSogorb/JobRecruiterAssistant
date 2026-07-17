@@ -1,0 +1,9 @@
+{
+    "languages":[
+        {"language": "Spanish", "level": "Native"},
+        {"language": "English", "level": "Fluent"},
+        {"language": "Catalan/Valencian", "level": "Fluent"},
+        {"language": "German", "level": "Basic"},
+        {"language": "Polish", "level": "Basic"}
+    ]
+}
