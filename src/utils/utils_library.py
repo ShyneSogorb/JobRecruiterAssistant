@@ -1,7 +1,8 @@
 from src.candidate.loader import CandidateLoader
 from time import perf_counter
 from functools import wraps
-from .logger import Logger
+from src.utils.logger import Logger
+import traceback
 
 def get_candidate():
     return CandidateLoader.load("src/profile/aboutme.md")
@@ -31,9 +32,11 @@ def TimedFunction(func):
 
         try:
             return func(*args, **kwargs)
-        except:
+        except Exception as e:
             total_time = perf_counter() - start
             logger.log(f"{func.__name__} failed at {_get_time_str(total_time)}")
+            logger.log(traceback.format_exc())
+            raise
         finally:
             total_time = perf_counter() - start
             logger.log(f"{func.__name__} took {_get_time_str(total_time)}")

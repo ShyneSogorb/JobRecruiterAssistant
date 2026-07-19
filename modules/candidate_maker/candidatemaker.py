@@ -162,7 +162,7 @@ class CandidateMakerPipeline:
         aditional = self._load_additional()
 
         result = CandidateProfile(
-            target_language="en",
+            target_language=TargetLanguage.English,
             personal=personal,
             skills=details.skills,
             transferable_skills=details.transferable_skills,

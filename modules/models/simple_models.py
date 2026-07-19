@@ -1,28 +1,24 @@
+from enum import StrEnum
 import re
 from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
+class StringModel(BaseModel):
+    string: str
 
 class ListString(BaseModel):
     array: list[str] = Field(default_factory=list)
 
+class FloatModel(BaseModel):
+    value: float = 0
 
-TargetLanguage = Literal["en", "es"]
+class TargetLanguage(StrEnum):
+    English = "en"
+    Spanish = "es"
 
-# "Classic" section headings recommended by Kickresume because ATS systems
-# recognize them reliably. The renderer should use (a faithful translation
-# of) these labels instead of inventing creative headings.
-STANDARD_SECTION_HEADERS: dict[str, dict[TargetLanguage, str]] = {
-    "personal": {"en": "Personal Information", "es": "Información personal"},
-    "summary": {"en": "Summary", "es": "Resumen"},
-    "skills": {"en": "Skills", "es": "Habilidades"},
-    "experience": {"en": "Work Experience", "es": "Experiencia laboral"},
-    "projects": {"en": "Projects", "es": "Proyectos"},
-    "education": {"en": "Education", "es": "Formación"},
-    "languages": {"en": "Languages", "es": "Idiomas"},
-    "additional": {"en": "Additional Information", "es": "Información adicional"},
-}
+class TargetLanguageModel(BaseModel):
+    language: TargetLanguage
 
 _DATE_RE = re.compile(r"^(0[1-9]|1[0-2])/\d{4}$")  # MM/YYYY, 2 digits required
 

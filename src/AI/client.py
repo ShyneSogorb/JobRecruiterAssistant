@@ -1,5 +1,6 @@
 import json
 import textwrap
+import threading
 from typing import Any
 
 import requests
@@ -11,10 +12,15 @@ from src.utils.logger import Logger
 
 class AIClient:
 
-    def __init__(self, logger: Logger, model: str = "qwen3:30b", base_url: str = "http://localhost:11434") -> None:
+    def __init__(self, stop_event: threading.Event, logger: Logger, model: str = "qwen3:30b", base_url: str = "http://localhost:11434") -> None:
         self.model = model
         self.base_url = base_url
         self.logger = logger
+        self.stop_event = stop_event
+
+    @property
+    def shutdown(self):
+        return self.stop_event.is_set() if self.stop_event is not None else False
 
     def _log_separator(self, nrows:int = 1, nslashes:int = 40):
         slashes = "-".join("-" for i in range(nslashes))
@@ -30,21 +36,32 @@ class AIClient:
 
         
 
-    def ask(self, prompt: str, think: bool = True, format: Any = None) -> AIResponse:
+    def ask_internal(self, prompt: str, think: bool = True, format: Any = None) -> AIResponse | None:
 
+        if self.shutdown: return None
         self._log_separator(3)
         self.logger.log("NEW QUESTION")
         self._log_separator(3)
 
         payload = self._build_payload(prompt, think, format)
-        self._log_section("Payload", payload)
+        self._log_section("INPUT PROMPT", textwrap.fill(prompt))
 
         response = self._send_request(payload)
 
         result = self._parse_response(response)
-        self._log_section("AI Response", result)
+        self._log_section("AI THINKING:\n", "No thinking" if result.message.thinking is None else textwrap.fill(result.message.thinking))
+        self._log_section("AI RESPONSE\n", result.message.content)
 
         return result
+    
+    def ask(self, prompt: str, think: bool = True, format: Any = None) -> AIResponse:
+        response = self.ask_internal(prompt, think, format)
+
+        #this will happen only during cancelation
+        if response is None: 
+            raise Exception()
+        
+        return response
 
     @property
     def chat_url(self) -> str:

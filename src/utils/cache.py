@@ -1,12 +1,12 @@
 from pathlib import Path
-from os import listdir
+from os import listdir, remove, removedirs
 from os.path import isfile, join
 
 import re
 from typing import Any, Callable
 
 def _default_save_method(target: Path, data: Any) -> None:
-    with open(target, "w+", encoding="utf8") as f: 
+    with open(target, "w", encoding="utf8") as f: 
         f.write(data)
 
 def _default_load_method(target: Path) -> str:
@@ -61,3 +61,18 @@ class CacheManager:
 
         self.logger.log(f"{path.name} loaded at {str(path)} by {load_method} method")
         return load_method(path)
+    
+    def _clear_cache(self, path: str | Path):
+        
+        path = self._fix_cache_path(str(path))
+        if path.exists(): 
+            remove(path)
+            removedirs(path.parent)
+            self.logger.log(f"Cache cleared at {path}")
+            return
+        
+        self.logger.log(f"{path} does not exist, can not clear")
+
+        if path.parent.exists():
+            removedirs(path.parent)
+

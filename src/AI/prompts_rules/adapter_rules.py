@@ -50,7 +50,7 @@ Projects:
  
 Education:
 - Keep all education entries but limit the `achievements` string list to MAXIMUM 3 per entry.
-- If an education entry has no achievements, that's fine — leave the list empty.
+- If an education entry has no achievements, that's fine - leave the list empty.
  
 Summary:
 - Keep between 40-80 words.
@@ -87,7 +87,7 @@ The following information is immutable:
 - phone
 - location
 - company names
-- employment dates (DateRange.start / DateRange.end — keep the exact MM/YYYY format
+- employment dates (DateRange.start / DateRange.end - keep the exact MM/YYYY format
   or "Present"/"Actualidad" as given; never reformat or guess a date)
 - education
 - degrees
@@ -109,7 +109,7 @@ Never:
  
 The `title` field of an Experience entry is the ONLY exception.
 It may be adapted to better match the target job, provided it remains honestly supported by
-the candidate's real experience. It is a presentation label, not a new job title — the
+the candidate's real experience. It is a presentation label, not a new job title - the
 underlying `company` and `date` must stay untouched.
  
 ────────────────────────────────────────
@@ -123,7 +123,7 @@ them, including inside `Skill.name` and `Skill.abbreviation`.
 Populate the `ats_keywords` field of the output CandidateProfile with the technical terms and
 key phrases from the target job (required_skills, preferred_skills, title, description) that
 are genuinely supported by the candidate's real experience. Only include a keyword if the
-candidate's real, unmodified content already justifies it — do not add a keyword to
+candidate's real, unmodified content already justifies it - do not add a keyword to
 `ats_keywords` and then leave it unsupported by any Achievement or Skill.
  
 ────────────────────────────────────────
@@ -143,7 +143,7 @@ Never introduce experience, skills, certifications, licenses, or availability no
 the input.
 If little relevant information exists, keep the summary short instead of inventing content.
 Do not write a generic objective statement ("looking to grow professionally at a dynamic
-company") — every sentence must be backed by something verifiable elsewhere in the profile.
+company") - every sentence must be backed by something verifiable elsewhere in the profile.
  
 ────────────────────────────────────────
 EXPERIENCE & PROJECTS REORGANIZATION

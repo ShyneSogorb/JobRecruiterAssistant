@@ -1,41 +1,32 @@
 SKILL_RULES = """
-You are selecting which technical skills should remain on a resume, given a specific job offer.
+You are a technical skills filter for a resume, given a specific job offer.
 
-The provided skills are the ONLY source of truth. You may not use outside knowledge to make
-assumptions about compatibility between technologies (e.g., whether a game engine supports a
-specific graphics API). If you are not certain a skill is irrelevant, keep it.
+Your only task: from the candidate's skill list, select the ones that 
+match or are directly related to what the job offer asks for 
+(required_skills, preferred_skills, ats_keywords, or technologies 
+explicitly mentioned in the job description).
 
-Your task is ONLY to decide which skills to KEEP and which to REMOVE.
-The output MUST be a strict subset of the provided skills - never add, rename, rewrite, merge,
-split, or otherwise modify any skill object. Copy each returned object exactly as given, including
-the "abbreviation" and "category" fields.
+Do NOT evaluate whether the candidate is a good "fit" for the role. 
+Do NOT decide whether their experience is compatible or relevant to the 
+position as a whole. That decision belongs to the candidate, not you.
 
-Do NOT:
-- invent, rename, rewrite, merge, or split skills
-- modify the name, abbreviation, or category fields
-- create new objects
-- infer experience the candidate does not have
-- assume technical incompatibility between tools/engines/APIs unless it is stated in the job offer
+RULES:
+1. KEEP any skill that appears in, matches, or is clearly related to the 
+   required_skills, preferred_skills, or ats_keywords of the job offer.
+2. KEEP generic programming skills that are universally applicable to any 
+   software role (e.g., Git, debugging, testing, version control) ONLY if 
+   the job offer mentions or implies them.
+3. REMOVE any skill that has no direct or indirect relation to what the 
+   job offer asks for - regardless of whether it's a "good skill" in 
+   general, belongs to a technically impressive domain, or could be 
+   useful in some other context. The only question is: does this offer 
+   ask for it or mention it?
+4. Do not add explanations, warnings, or commentary about whether the 
+   profile is a good fit. Just filter.
+5. The output must be an exact subset of the received skills: do not 
+   invent, rename, merge, or split any skill object.
 
-DECISION RULES (apply in this order):
-
-1. KEEP if the skill is explicitly required or explicitly preferred by the job offer.
-2. KEEP if the skill is a generic/foundational skill (e.g., math, physics, general programming
-   patterns, debugging, optimization techniques) - these default to KEEP unless clearly and
-   specifically irrelevant to any software/technical role.
-3. KEEP if the skill is a distinct, named sub-skill of a broader skill you are also keeping
-   (e.g., if you keep "Unreal Engine", still keep "Blueprints" separately if it appears as its
-   own skill - do not remove a specific skill just because a broader one covers it).
-4. KEEP if the skill would plausibly help ATS keyword matching for this job title/domain.
-5. REMOVE only if the skill is clearly unrelated to software/technical work in general, OR is
-   specific to a domain with no plausible connection to this role (e.g., unrelated professions
-   like medical/animal care skills on a software engineering resume).
-6. When uncertain between KEEP and REMOVE, default to KEEP.
-
-For each skill you REMOVE, you must be able to justify it using rule 5 specifically - if you
-can't point to a concrete unrelated-domain reason, keep the skill instead.
-
-Return ONLY the remaining skills, in the same order as the input.
+Return ONLY the resulting skills, in the same order as the input.
 """
 
 SOFT_SKILLS_RULES = """

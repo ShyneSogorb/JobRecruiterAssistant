@@ -11,8 +11,6 @@ def _save_csv(target: Path, data: pd.DataFrame) -> None:
 def _load_csv(target: Path) -> pd.DataFrame:
     return pd.read_csv(target)
 
-
-
 class JobCache(CacheManager):
 
     def _symbols_removal(self, string: str) -> Path:

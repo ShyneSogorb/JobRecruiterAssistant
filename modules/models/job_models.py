@@ -1,6 +1,9 @@
 from typing import Annotated
 from pydantic import BaseModel, Field
+import sqlite3
 from enum import StrEnum
+
+from modules.models.simple_models import TargetLanguage
 
 
 class SalaryPeriod(StrEnum):
@@ -69,9 +72,7 @@ class ExperienceLevel(StrEnum):
     lead = "lead"
 
 
-class TargetLanguage(StrEnum):
-    English = "en"
-    Spanish = "es"
+
 
 
 class LanguageRequirement(BaseModel):
@@ -244,3 +245,20 @@ class JobOffer(BaseModel):
         description="Salary information only if explicitly stated in the "
         "text. Null if no salary figure or range is given.",
     )
+
+class EJobState(StrEnum):
+    RAW = "raw"
+    PARSED = "parsed"
+    READY = "ready"
+    APPLIED = "applied"
+
+class JobApplication(BaseModel):
+    id: str
+    job: JobOffer
+    cv: str | None = None
+    cv_path: str | None = None
+    hiring_manager: str | None = None
+    cover_letter:str | None = None
+    state: EJobState
+    salary: Salary | None = None
+    score: float | None = None

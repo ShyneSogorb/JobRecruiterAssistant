@@ -18,9 +18,13 @@ class JobOfferParser:
     def parse(self, offer: JobOffer) -> JobOffer:
         self.logger.log(f"Parsing job offer {offer.role} at {offer.company}")
 
+        self.logger.log("Extracting offer skills")
+
         prompt = self.prompts.build_job_offer_parser(offer.model_dump_json(), JobOffer.model_json_schema())
         response = self.ai.ask(prompt, True, JobOffer.model_json_schema())
         result = JobOffer.model_validate_json(response.message.content)
+
+        self.logger.log("Extracting ats-words")
 
         prompt = self.prompts.build_job_ats_extractor(result.model_dump_json())
         response = self.ai.ask(prompt, format=ListString.model_json_schema())

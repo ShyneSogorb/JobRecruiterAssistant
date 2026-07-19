@@ -221,3 +221,5 @@ test/
 logs/
 cache/
 database/
+!modules/database/
+*.db

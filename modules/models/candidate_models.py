@@ -123,9 +123,6 @@ class CandidateProfile(BaseModel):
             for kw in self.ats_keywords.array
         }
 
-    def section_header(self, section: str) -> str:
-        """Returns the standard section header (recommended by Kickresume) in the target language."""
-        return STANDARD_SECTION_HEADERS[section][self.target_language]
 
 
 class DetailsExtraction(BaseModel):

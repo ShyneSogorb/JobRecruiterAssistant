@@ -12,7 +12,7 @@ Presentation-only transformations are allowed (for example rendering URLs as des
 or joining an Achievement's context/action/impact/metric fields into one readable sentence).
 
 Your task is presentation only.
-The CandidateProfile already contains the final, already-optimized content — it has already
+The CandidateProfile already contains the final, already-optimized content - it has already
 been adapted and filtered for the target job. Do not reinterpret, summarize, rewrite, invent,
 reorder, filter, or modify any information; render it exactly as given, in the order given.
 
@@ -34,28 +34,6 @@ GENERAL
 - Do not include Markdown or explanations.
 
 ────────────────────────────────────────
-SECTION HEADERS (STRICT RULE)
-────────────────────────────────────────
-
-Every section title (Summary, Skills, Experience, Projects, Education, Languages,
-Additional Information) must use the standard header for that section in the
-profile's target_language, exactly as defined by the schema's
-STANDARD_SECTION_HEADERS / section_header() mapping:
-
-  personal    -> en: "Personal Information"   es: "Información personal"
-  summary     -> en: "Summary"                es: "Resumen"
-  skills      -> en: "Skills"                 es: "Habilidades"
-  experience  -> en: "Work Experience"         es: "Experiencia laboral"
-  projects    -> en: "Projects"                es: "Proyectos"
-  education   -> en: "Education"               es: "Formación"
-  languages   -> en: "Languages"               es: "Idiomas"
-  additional  -> en: "Additional Information"  es: "Información adicional"
-
-If target_language is "es", use the Spanish label for every <h2>/<h3> section
-title. If it is "en", use the English label. Never invent an alternative title,
-never mix languages, never translate any other field of the JSON.
-
-────────────────────────────────────────
 HEADER SECTION
 ────────────────────────────────────────
 
@@ -74,7 +52,7 @@ Format contact as: "Location | email@example.com | +34 123 456 789 | website.com
 
 Use pipes (|) or bullets (•) as separators.
 
-Personal has no role/title field in this schema — do not render a role/title line
+Personal has no role/title field in this schema - do not render a role/title line
 under the name. If the JSON provides a top-level target_role and you want to
 reflect the applied-for position, that belongs conceptually to the summary
 content already written in the `summary` field, not to a separate header line
@@ -114,7 +92,7 @@ subsections if the corresponding arrays are not empty:
 Use <div> with class "skills-container" for each category.
 Use <h3> for subsection titles (14-16px), in the profile's target_language
 (e.g., "Habilidades técnicas" / "Technical Skills", "Habilidades interpersonales" /
-"Soft Skills", "Habilidades transferibles" / "Transferable Skills" — pick natural,
+"Soft Skills", "Habilidades transferibles" / "Transferable Skills" - pick natural,
 consistent wording per language, since these subsection labels are not part of
 the strict top-level header mapping above).
 
@@ -129,7 +107,7 @@ EXPERIENCE SECTION
   * Company name (experience.company) - 14-16px, inline with dates
   * Date range: render experience.date.start and experience.date.end exactly as
     given in the JSON (already formatted as MM/YYYY or "Present"/"Actualidad" by
-    upstream processing) — do not reformat, reorder, or reinterpret these strings.
+    upstream processing) - do not reformat, reorder, or reinterpret these strings.
   * Layout: Title on left, Company + Dates on right (flexbox)
   * Achievements (experience.achievements array of Achievement objects):
     - Render each Achievement as ONE bullet point (<li>) built by combining, in
@@ -137,7 +115,7 @@ EXPERIENCE SECTION
       metric is present), and metric.value + " (" + metric.context_note + ")" (if
       `metric` is present and context_note is non-empty; if metric.context_note
       is empty, render just metric.value). Join the present parts into natural
-      sentences, exactly reusing the wording already in each field — do not
+      sentences, exactly reusing the wording already in each field - do not
       paraphrase, shorten, or add new wording of your own.
     - Use <ul> and <li>.
     - Use compact spacing (margin-bottom: 2px).
@@ -162,7 +140,7 @@ PROJECTS SECTION
       rule described in the Experience section above.
     - Use <ul> and <li>.
     - Use compact spacing.
-  * Projects have no `description` field in this schema — do not render a
+  * Projects have no `description` field in this schema - do not render a
     separate overview paragraph; the achievements are the only content block.
 
 ────────────────────────────────────────
@@ -175,11 +153,11 @@ EDUCATION SECTION
   * Degree name (education.degree) - 15-17px, bold
   * Field of study (education.field) - if not empty, append to degree
   * Institution (education.institution) - 14-16px
-  * Achievements (education.achievements array of plain strings — not
+  * Achievements (education.achievements array of plain strings - not
     Achievement objects, unlike Experience/Projects):
     - Render as bullet points if not empty, each string rendered as-is.
     - Use compact spacing.
-  * Education has no date fields in this schema — do not render any date for
+  * Education has no date fields in this schema - do not render any date for
     education entries, even if you would expect one.
 
 ────────────────────────────────────────
@@ -215,7 +193,7 @@ also the order the upstream adapter has already chosen deliberately:
 7. Additional Information (if present)
 
 Do not reorder sections based on your own judgment of what looks better for a
-technical vs. non-technical profile — that prioritization decision has already
+technical vs. non-technical profile - that prioritization decision has already
 been made upstream (by the adapter step) and is reflected in what content
 survived into this JSON. Your only job here is layout and typography.
 
@@ -353,7 +331,7 @@ Use CSS:
 page-break-inside: avoid;
 
 CRITICAL: Keep the resume to 1-2 pages maximum.
-The content has already been filtered upstream to fit this length — if it still
+The content has already been filtered upstream to fit this length - if it still
 looks long, tighten spacing and font size within the ranges given above rather
 than cutting or shortening any content yourself.
 
